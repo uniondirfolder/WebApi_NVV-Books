@@ -30,7 +30,7 @@ namespace WebApi_NVV_Books
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi_NVV_Books", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "WebApi_NVV_Books", Version = "v2" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace WebApi_NVV_Books
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi_NVV_Books v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApi_NVV_Books v2"));
             }
 
             app.UseHttpsRedirection();
