@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi_NVV_Books.Data;
+using WebApi_NVV_Books.Data.Services;
 
 namespace WebApi_NVV_Books
 {
@@ -36,6 +37,9 @@ namespace WebApi_NVV_Books
 
             //Configure Dbcontext with SQL  Install-Package Microsoft.EntityFrameworkCore.SqlServer
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+            //Configure the Services
+            services.AddTransient<BooksService>();
 
             services.AddSwaggerGen(c =>
             {
