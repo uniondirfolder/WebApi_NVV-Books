@@ -63,6 +63,8 @@ namespace WebApi_NVV_Books
             {
                 endpoints.MapControllers();
             });
+
+            AppDbInitializer.Seed(app);
         }
     }
 }
