@@ -35,5 +35,12 @@ namespace WebApi_NVV_Books.Controllers
             _booksService.AddBook(book);
             return Ok();
         }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult UpdatebookById(int id, [FromBody]BookVM book) 
+        {
+            var updateBook = _booksService.UpdateBookById(id, book);
+            return Ok(updateBook);
+        }
     }
 }
