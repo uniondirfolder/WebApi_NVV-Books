@@ -42,5 +42,12 @@ namespace WebApi_NVV_Books.Controllers
             var updateBook = _booksService.UpdateBookById(id, book);
             return Ok(updateBook);
         }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id) 
+        {
+            _booksService.DeleteBookById(id);
+            return Ok();
+        }
     }
 }
