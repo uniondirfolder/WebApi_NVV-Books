@@ -21,5 +21,12 @@ namespace WebApi_NVV_Books.Controllers
             _authorsService.AddAuthor(author);
             return Ok();
         }
+
+        [HttpGet("get-author-with-books-by-id/{id}")]
+        public IActionResult GetAuthorWithBooks(int id) 
+        {
+            var response = _authorsService.GetuthorWithBooks(id);
+            return Ok(response);
+        }
     }
 }
