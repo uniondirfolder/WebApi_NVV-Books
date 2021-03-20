@@ -23,6 +23,37 @@ namespace WebApi_NVV_Books.Controllers
             _publishersService = publishersService;
         }
 
+        [HttpGet("get-all-publishers")]
+        public IActionResult GetAllPublishers() 
+        {
+            try
+            {
+                var _result = _publishersService.GetAllPublishers();
+                return Ok(_result);
+            }
+            catch (System.Exception)
+            {
+
+                return BadRequest("Sorry, we could not load the publishers");
+            }
+        }
+
+        [HttpGet("get-all-sort-filtering-publishers")]
+        public IActionResult GetAllPublishers(string sortBy, string searchStr, int pageNumber)
+        {
+            try
+            {
+                var _result = _publishersService.GetAllPublishers(sortBy, searchStr, pageNumber);
+                return Ok(_result);
+            }
+            catch (System.Exception)
+            {
+
+                return BadRequest("Sorry, we could not load the publishers");
+            }
+        }
+
+
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {

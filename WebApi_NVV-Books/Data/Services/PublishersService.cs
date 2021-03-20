@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WebApi_NVV_Books.Data.Models;
@@ -15,6 +16,41 @@ namespace WebApi_NVV_Books.Data.Services
         {
             _appDbContext = appDbContext;
         }
+
+        public List<Publisher> GetAllPublishers() => _appDbContext.Publishers.ToList();
+
+        public List<Publisher> GetAllPublishers(string sortBy, string searchStr, int? pageNumber) 
+        {
+            var allPublishers = _appDbContext.Publishers.OrderBy(n => n.Name).ToList();
+
+            if (!string.IsNullOrEmpty(sortBy)) 
+            {
+                switch (sortBy)
+                {
+                    case "name_desc":
+                        allPublishers = allPublishers.OrderByDescending(n => n.Name == sortBy).ToList();
+                        break;
+                        //like address
+                    default:
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchStr)) 
+            {
+                allPublishers = allPublishers.Where(n => n.Name.Contains(searchStr,
+                    StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
+
+
+            //Paging
+            int pageSize = 5;
+            allPublishers = Paging.PaginatedList<Publisher>.Create(allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
+           
+            return allPublishers;
+        }
+
+
 
         public Publisher AddPublisher(PublisherVM  publisherVM)
         {
@@ -44,6 +80,8 @@ namespace WebApi_NVV_Books.Data.Services
 
             return _publisherData;
         }
+
+        
 
         public void DeletePublisherById(int id)
         {
