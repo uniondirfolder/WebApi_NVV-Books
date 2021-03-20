@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WebApi_NVV_Books.Data.Models
 {
@@ -18,5 +19,7 @@ namespace WebApi_NVV_Books.Data.Models
         //Navigation Properties
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
+
+        public List<Books_Authors> Books_Authors { get; set; }
     }
 }
