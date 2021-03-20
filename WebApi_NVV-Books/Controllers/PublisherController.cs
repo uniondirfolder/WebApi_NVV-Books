@@ -40,7 +40,7 @@ namespace WebApi_NVV_Books.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            throw new System.Exception("This is an exception that will be handled by middleware");
+            //throw new System.Exception("This is an exception that will be handled by middleware");
 
             var _response = _publishersService.GetPublisherById(id);
             if(_response != null)

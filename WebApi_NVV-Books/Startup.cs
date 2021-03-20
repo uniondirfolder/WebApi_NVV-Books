@@ -68,6 +68,7 @@ namespace WebApi_NVV_Books
 
             //Exception Handling
             app.ConfigureBuildInExceptionHandler();
+            //app.ConfigureCustomExceptionHandler();
             
             app.UseEndpoints(endpoints =>
             {

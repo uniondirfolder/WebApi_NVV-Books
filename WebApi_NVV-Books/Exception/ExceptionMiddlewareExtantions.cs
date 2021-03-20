@@ -35,5 +35,10 @@ namespace WebApi_NVV_Books.Exception
                 });
             });
         }
+    
+        public static void ConfigureCustomExceptionHandler(this IApplicationBuilder app) 
+        {
+            app.UseMiddleware<CustomExceptionMiddleware>();
+        }
     }
 }
