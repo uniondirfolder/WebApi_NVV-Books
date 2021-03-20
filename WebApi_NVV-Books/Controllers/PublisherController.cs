@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi_NVV_Books.ActionResults;
 using WebApi_NVV_Books.Data.Models;
 using WebApi_NVV_Books.Data.Services;
 using WebApi_NVV_Books.Data.ViewModels;
@@ -83,6 +84,24 @@ namespace WebApi_NVV_Books.Controllers
             else
             {
                 return null;
+            }
+        }
+
+        //custom
+        [HttpGet("get-publisher-custom-result-id/{id}")]
+        public CustomActionResult GetPublisherCustomResultById(int id)
+        {
+            var _response = _publishersService.GetPublisherById(id);
+
+            if (_response != null)
+            {
+                var _responseObj = new CustomActionResultVM() { Publisher = _response };
+                return new CustomActionResult(_responseObj);
+            }
+            else
+            {
+                var _responseObj = new CustomActionResultVM() { Exception=new System.Exception("This is coming from publishers controler") };
+                return new CustomActionResult(_responseObj);
             }
         }
 
