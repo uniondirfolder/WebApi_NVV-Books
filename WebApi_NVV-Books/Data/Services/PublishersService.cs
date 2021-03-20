@@ -14,12 +14,16 @@ namespace WebApi_NVV_Books.Data.Services
             _appDbContext = appDbContext;
         }
 
-        public void AddPublisher(PublisherVM  publisherVM)
+        public Publisher AddPublisher(PublisherVM  publisherVM)
         {
             var _publisher = new Publisher() { Name = publisherVM.Name };
             _appDbContext.Publishers.Add(_publisher);
             _appDbContext.SaveChanges();
+
+            return _publisher;
         }
+
+        public Publisher GetPublisherById(int id) => _appDbContext.Publishers.FirstOrDefault(n => n.Id == id);
 
         public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId) 
         {
