@@ -49,6 +49,10 @@ namespace WebApi_NVV_Books.Data.Services
                 _appDbContext.Publishers.Remove(_publisher);
                 _appDbContext.SaveChanges();
             }
+            else
+            {
+                throw new Exception($"The publisher with id: {id} does not exist");
+            }
         }
 
     }
