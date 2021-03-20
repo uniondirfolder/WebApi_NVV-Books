@@ -37,9 +37,15 @@ namespace WebApi_NVV_Books.Data.Services
             return _publisherData;
         }
 
-        private object BookAuthorVM()
+        public void DeletePublisherById(int id)
         {
-            throw new NotImplementedException();
+            var _publisher = _appDbContext.Publishers.FirstOrDefault(n => n.Id == id);
+            if (_publisher != null) 
+            {
+                _appDbContext.Publishers.Remove(_publisher);
+                _appDbContext.SaveChanges();
+            }
         }
+
     }
 }
