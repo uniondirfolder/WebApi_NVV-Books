@@ -70,6 +70,21 @@ namespace WebApi_NVV_Books.Controllers
             }
         }
 
+        //return type
+        [HttpGet("get-publisher-T-by-id/{id}")]
+        public ActionResult<Publisher> GetPublisherTById(int id)
+        {
+            var _response = _publishersService.GetPublisherById(id);
+
+            if (_response != null)
+            {
+                return _response;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         [HttpGet("get-publisher-books-with-authors/{id}")]
         public IActionResult GetPublisherData(int id) 
