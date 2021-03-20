@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using WebApi_NVV_Books.Data.Models;
 using WebApi_NVV_Books.Data.ViewModels;
+using WebApi_NVV_Books.Exception;
 
 namespace WebApi_NVV_Books.Data.Services
 {
@@ -16,6 +18,8 @@ namespace WebApi_NVV_Books.Data.Services
 
         public Publisher AddPublisher(PublisherVM  publisherVM)
         {
+            if (StringStartsWithNumber(publisherVM.Name)) throw new PublisherNameException("Name starts with number", publisherVM.Name);
+
             var _publisher = new Publisher() { Name = publisherVM.Name };
             _appDbContext.Publishers.Add(_publisher);
             _appDbContext.SaveChanges();
@@ -51,9 +55,11 @@ namespace WebApi_NVV_Books.Data.Services
             }
             else
             {
-                throw new Exception($"The publisher with id: {id} does not exist");
+                throw new System.Exception($"The publisher with id: {id} does not exist");
             }
         }
+
+        private bool StringStartsWithNumber(string name) => (Regex.IsMatch(name, @"^\d"));
 
     }
 }

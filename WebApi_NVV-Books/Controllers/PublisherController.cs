@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApi_NVV_Books.Data.Services;
 using WebApi_NVV_Books.Data.ViewModels;
+using WebApi_NVV_Books.Exception;
 
 namespace WebApi_NVV_Books.Controllers
 {
@@ -66,7 +67,11 @@ namespace WebApi_NVV_Books.Controllers
                 _publishersService.DeletePublisherById(id);
                 return Ok();
             }
-            catch (Exception ex)
+            catch(PublisherNameException ex) 
+            {
+                return BadRequest($"{ex.Message}, Publisher name {ex.PublisherName}");
+            }
+            catch (System.Exception ex)
             {
 
                 return BadRequest(ex.Message);
