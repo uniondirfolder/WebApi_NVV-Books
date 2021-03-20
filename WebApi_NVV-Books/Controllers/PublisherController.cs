@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi_NVV_Books.Data.Models;
 using WebApi_NVV_Books.Data.Services;
 using WebApi_NVV_Books.Data.ViewModels;
 using WebApi_NVV_Books.Exception;
@@ -52,6 +53,23 @@ namespace WebApi_NVV_Books.Controllers
                 return NotFound();
             }
         }
+
+        //return type
+        [HttpGet("get-publisher-type-by-id/{id}")]
+        public Publisher GetPublisherTypeById(int id)
+        {
+            var _response = _publishersService.GetPublisherById(id);
+
+            if (_response != null)
+            {
+                return _response;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         [HttpGet("get-publisher-books-with-authors/{id}")]
         public IActionResult GetPublisherData(int id) 
