@@ -1,4 +1,6 @@
-﻿using WebApi_NVV_Books.Data.Models;
+﻿using System;
+using System.Linq;
+using WebApi_NVV_Books.Data.Models;
 using WebApi_NVV_Books.Data.ViewModels;
 
 namespace WebApi_NVV_Books.Data.Services
@@ -17,6 +19,27 @@ namespace WebApi_NVV_Books.Data.Services
             var _publisher = new Publisher() { Name = publisherVM.Name };
             _appDbContext.Publishers.Add(_publisher);
             _appDbContext.SaveChanges();
+        }
+
+        public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId) 
+        {
+            var _publisherData = _appDbContext.Publishers.Where(n => n.Id == publisherId)
+                .Select(n => new PublisherWithBooksAndAuthorsVM() 
+                {
+                    Name = n.Name,
+                    BookAuthors = n.Books.Select(n => new BookAuthorVM()
+                    {
+                        BookName=n.Title,
+                        BookAuthors = n.Books_Authors.Select(n=>n.Author.FullName).ToList()
+                    }).ToList()
+            }).FirstOrDefault();
+
+            return _publisherData;
+        }
+
+        private object BookAuthorVM()
+        {
+            throw new NotImplementedException();
         }
     }
 }
