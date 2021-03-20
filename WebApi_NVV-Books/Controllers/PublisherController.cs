@@ -29,7 +29,7 @@ namespace WebApi_NVV_Books.Controllers
                 var newPublisher = _publishersService.AddPublisher(publisher);
                 return Created(nameof(AddPublisher), newPublisher);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
 
                 return BadRequest(ex.Message);
@@ -40,6 +40,8 @@ namespace WebApi_NVV_Books.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
+            throw new System.Exception("This is an exception that will be handled by middleware");
+
             var _response = _publishersService.GetPublisherById(id);
             if(_response != null)
             {

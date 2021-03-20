@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApi_NVV_Books.Data;
 using WebApi_NVV_Books.Data.Services;
+using WebApi_NVV_Books.Exception;
 
 namespace WebApi_NVV_Books
 {
@@ -65,6 +66,9 @@ namespace WebApi_NVV_Books
 
             app.UseAuthorization();
 
+            //Exception Handling
+            app.ConfigureBuildInExceptionHandler();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
